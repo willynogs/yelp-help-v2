@@ -1,13 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
+import Test from './Components/Test'
 
-const Test = () => {
-  const [active, setActive] = useState(false)
-  return (
-    <>
-      <p>{active ? ':: ACTIVE ::' : 'Inactive'}</p>
-      <button type='button' onClick={() => setActive(prevState => !prevState)}>Toggle</button>
-    </>
-  )
+const App = () => {
+  return <Test />
 }
 
-export default Test
+export default App
