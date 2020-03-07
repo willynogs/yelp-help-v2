@@ -23,5 +23,8 @@ module.exports = {
       template: "./src/index.html",
       filename: "./index.html"
     })
-  ]
+  ],
+  devServer: {
+    headers: { "Access-Control-Allow-Origin": "*" }
+  }
 };

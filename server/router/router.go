@@ -15,7 +15,7 @@ import (
 )
 
 const port = ":8000"
-const apiKey = ""
+const apiKey = "c3GiN7UKkiD6fo_UaPlEveSoz2alFdimqPHpbTI4cXSLBp7cgvrParSkyF3WNlWz9jlRCD4DlSMRuVtCLx5wOBiXRj-rlrDWgZYvZM5SlwtYgC70Ids1gZIbmwNfXnYx"
 
 func fetchYelpBusinesses(params map[string]string) map[string]interface{} {
 	client := resty.New()
@@ -37,6 +37,7 @@ func fetchYelpBusinesses(params map[string]string) map[string]interface{} {
 }
 
 func randomHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	yelpParams := map[string]string{
 		"latitude":  "39.945800",
 		"longitude": "-82.990910",
@@ -58,6 +59,7 @@ func resultHandler(w http.ResponseWriter, r *http.Request) {
 /* Listen starts server on provided port */
 func Listen() {
 	r := mux.NewRouter()
+	r.Use(mux.CORSMethodMiddleware(r))
 	r.HandleFunc("/random", randomHandler)
 	r.HandleFunc("/result/{id}", resultHandler)
 	loggedRouter := handlers.LoggingHandler(os.Stdout, r)
